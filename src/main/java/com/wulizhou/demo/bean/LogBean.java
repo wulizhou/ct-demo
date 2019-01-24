@@ -1,6 +1,6 @@
 package com.wulizhou.demo.bean;
 
-public class TestBean {
+public class LogBean {
 
 	String a;
 	String b;
