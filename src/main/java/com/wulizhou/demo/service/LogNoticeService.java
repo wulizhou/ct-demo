@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
-import com.wulizhou.log.handle.LogDefaultAdapter;
-import com.wulizhou.log.handle.bean.LogInfo;
+import com.wulizhou.ct.log.autoconfigue.handle.LogDefaultAdapter;
+import com.wulizhou.ct.log.autoconfigue.handle.bean.LogInfo;
 
 /**
  * 使用方法二，继承LogDefaultAdapter进行操作，LogDefaultAdpater默认已经打印日志

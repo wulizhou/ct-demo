@@ -23,7 +23,7 @@
 
 		<dependency>
 			<groupId>com.wulizhou</groupId>
-			<artifactId>ct-log</artifactId>
+			<artifactId>ct-log-starter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 

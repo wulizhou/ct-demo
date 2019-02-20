@@ -2,8 +2,8 @@ package com.wulizhou.demo.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.wulizhou.log.handle.LogHandle;
-import com.wulizhou.log.handle.bean.LogInfo;
+import com.wulizhou.ct.log.autoconfigue.handle.LogHandle;
+import com.wulizhou.ct.log.autoconfigue.handle.bean.LogInfo;
 
 /**
  * 使用方法一，实现LogHandle进行操作
