@@ -1,5 +1,6 @@
 package com.wulizhou.pets.service.impl;
 
+import com.wulizhou.pets.model.dao.User;
 import com.wulizhou.pets.model.mapper.UserMapper;
 import com.wulizhou.pets.service.facade.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,4 +12,8 @@ public class UserService implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
+    public int add(User user) {
+        return userMapper.insert(user);
+    }
 }
