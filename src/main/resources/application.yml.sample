@@ -1,0 +1,38 @@
+# 项目端口
+server:
+  port: 8080
+
+spring:
+  datasource:
+    name:
+    url: jdbc:mysql://localhost:3306/pets?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+  redis:
+    database: 1
+    host: localhost
+    password:
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 100
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+# 日志
+logging:
+  level:
+    root: info
+  file: ./pets.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"

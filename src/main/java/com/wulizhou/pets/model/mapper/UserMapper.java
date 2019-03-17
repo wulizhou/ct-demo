@@ -1,8 +1,8 @@
 package com.wulizhou.pets.model.mapper;
 
-import com.wulizhou.pets.model.dao.User;
-import tk.mybatis.mapper.common.Mapper;
+import com.wulizhou.pets.model.entity.User;
+import com.wulizhou.pets.system.common.BaseMapper;
 
-public interface UserMapper extends Mapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
 }

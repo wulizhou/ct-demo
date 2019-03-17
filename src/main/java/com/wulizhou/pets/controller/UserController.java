@@ -1,7 +1,7 @@
 package com.wulizhou.pets.controller;
 
 
-import com.wulizhou.pets.model.dao.User;
+import com.wulizhou.pets.model.entity.User;
 import com.wulizhou.pets.service.facade.IUserService;
 import com.wulizhou.pets.system.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserController {
     public Result add() {
         User user = new User();
         user.setAvatar("").setMobile("18123906660").setUsername("wulizhou");
-        userService.add(user);
+        userService.save(user);
         return Result.ok(user.getId());
     }
 

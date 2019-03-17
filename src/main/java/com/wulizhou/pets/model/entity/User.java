@@ -1,4 +1,4 @@
-package com.wulizhou.pets.model.dao;
+package com.wulizhou.pets.model.entity;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

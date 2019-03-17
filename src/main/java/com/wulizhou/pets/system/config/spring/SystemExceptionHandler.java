@@ -1,4 +1,4 @@
-package com.wulizhou.pets.system.config;
+package com.wulizhou.pets.system.config.spring;
 
 import com.wulizhou.pets.system.common.Result;
 import com.wulizhou.pets.system.common.ResultCode;
