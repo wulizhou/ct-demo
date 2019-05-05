@@ -15,9 +15,9 @@ public class User {
     @Id
     private Long id;
 
-    private String mobile;
+    private String phone;
 
-    private String username;
+    private String userName;
 
     private String avatar;
 
