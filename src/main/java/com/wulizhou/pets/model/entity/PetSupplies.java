@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author D
+ *
  * @Create in 2019/5/5 16:07
  */
 @Data

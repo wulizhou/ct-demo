@@ -37,7 +37,7 @@ updateTime datetime DEFAULT NULL COMMENT '更新时间'
 );
 --用户
 create table users(
-userId int auto_increment not null primary key,
+userId int auto_increment  primary key,
 userName varchar(20) not null  COMMENT '用户名',
 avatar varchar(100) not null  COMMENT '用户头像',
 -- password varchar(20) not null COMMENT '密码',
@@ -60,6 +60,12 @@ userId INT COMMENT '用户ID',
 petSupplyId INT COMMENT '宠物用品ID',
 createTime datetime DEFAULT NULL COMMENT '创建时间',
 updateTime datetime DEFAULT NULL COMMENT '更新时间'
+);
+--文章表
+create table article(
+articleId int auto_increment  primary key,
+petType CHAR(1) NOT NULL DEFAULT '1' COMMENT '宠物类型，1-狗，2-猫，3-其它',
+content text COMMENT '文章内容'
 );
 
 ############
@@ -255,3 +261,71 @@ VALUES (1, '加拿大纽顿nutram 无谷系列去骨鳟鱼三文鱼全期犬粮6
 
 INSERT INTO users (`userId`, `userName`, `avatar`, `phone`, `createTime`, `updateTime`)
 VALUES (NULL, NULL, NULL, NULL, NULL, NULL);
+
+INSERT INTO article (`petType`, `content`)
+VALUES ('2','imgUrl:src/assets/pet/train/cat1.jpg
+title:怎么训练猫咪？猫的训练
+ <div class="leftside_body">
+      <div class="article_title">
+        <h1>怎么训练猫咪？猫的训练</h1>
+        <span>by:呦呦</span>
+      </div>
+      <div class="article_body">
+        <p
+          class="article_text"
+        >在生活中训练狗狗比较常见。狗狗智商很高，喜欢讨好主人，喜欢听从命令。但是猫咪性格桀骜，它们是自由和独立的，将训练这样的词用在猫咪身上似乎是一件很不可能的事情。猫咪会更忠于自己，它只做它喜欢的事情。家长们要做的是如何引导猫咪，达到你想要的效果。怎么训练猫咪？猫的训练</p>
+        <p style="text-align: center;">
+          &nbsp;
+          <span class="replace_title">
+            <img
+              style="width:100%"
+              src="src/assets/pet/train/cat/cat11.jpg"
+              title="猫的训练"
+              alt="猫的训练"
+            >
+            <br>猫的训练
+          </span>
+        </p>
+        <p
+          class="article_text"
+        >猫的训练：最高效的训练猫咪的方法就是通过严厉的奖惩措施，让猫咪形成条件发射。它知道自己做什么样的事情会被奖励好吃的零食并享受主人的爱抚，也知道做什么事情会受到严厉的惩罚。至于其行为，则需要主人慢慢引导。</p>
+
+        <p
+          class="article_text"
+        >猫咪训练在它们2-3月龄时就可以开始了，成年的猫咪训练难度要比幼猫大很多，因为很多行为已经固化，不好的习惯改变也是一个漫长的过程。而2-3月龄的猫咪，既容易培养感情在接收信息方面也是比较强的。</p>
+
+        <p style="text-align: center;">
+          &nbsp;
+          <span class="replace_title">
+            <img
+              style="width:100%"
+              src="src/assets/pet/train/cat/cat12.jpg"
+              title="猫的训练"
+              alt="猫的训练"
+            >
+            <br>猫的训练
+          </span>
+        </p>
+        <p
+          class="article_text"
+        >你需要明确的简短的口令，如猫咪正在做你不允许的事情。可以严厉的呵斥它们，并对猫咪说不。长期下来，猫咪对不这个字会有一定的理解。它们知道在做哪些事的时候主人会说不，会严厉呵斥。</p>
+        <p
+          class="article_text"
+        >别的你想让猫咪做的事情，如握手。可以对猫咪说握手，然后抬起它们的手手放在掌心，并喂给猫咪它们喜欢的零食。不断的强化口令和动作，并给与适当的奖励，猫咪会理解你的意思哦。饥饿的猫咪会更容易训练，学习动力更强。每次训练10分钟左右就可以了，不然猫咪会厌烦焦躁。</p>
+        <p style="text-align: center;">
+          &nbsp;
+          <span class="replace_title">
+            <img
+              style="width:100%"
+              src="src/assets/pet/train/cat/cat13.jpg"
+              title="猫的训练"
+              alt="猫的训练"
+            >
+            <br>猫的训练
+          </span>
+        </p>
+        <p
+          class="article_text"
+        >以上介绍了猫的训练技巧。但其实，猫咪性格不同，有的猫咪是乐于接受主人训练的，有的猫咪则对训练表现的非常排斥。不要强迫猫咪接受你的命令，只要它们能融入家庭生活和我们其乐融融就可以了哦。对于接受训练的猫咪也要有足够的耐心，有时候不是猫咪不愿意做，而是它们不懂得怎么做。</p>
+      </div>
+    </div>');

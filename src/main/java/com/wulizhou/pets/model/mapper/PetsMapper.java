@@ -4,7 +4,7 @@ import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.system.common.BaseMapper;
 
 /**
- * @author D
+ *
  * @Create in 2019/5/5 22:45
  */
 public interface PetsMapper extends BaseMapper<Pets> {

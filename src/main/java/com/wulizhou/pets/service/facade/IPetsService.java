@@ -1,12 +1,13 @@
 package com.wulizhou.pets.service.facade;
 
+import com.wulizhou.pets.model.entity.Article;
 import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.system.common.IBaseService;
 
 import java.util.List;
 
 /**
- * @author D
+ *
  * @Create in 2019/5/5 22:26
  */
 public interface IPetsService extends IBaseService<Pets> {
@@ -28,4 +29,8 @@ public interface IPetsService extends IBaseService<Pets> {
 	 * @return
 	 */
 	List<Pets> getPetsByLikedAndCollected();
+
+	List<Pets> getPetsByPetType(String petType, Integer order);
+
+	List<Article> getArtical(String petType);
 }

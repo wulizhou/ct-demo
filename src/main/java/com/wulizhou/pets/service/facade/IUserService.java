@@ -5,4 +5,5 @@ import com.wulizhou.pets.system.common.IBaseService;
 
 public interface IUserService extends IBaseService<User> {
 
+	String login(User user);
 }

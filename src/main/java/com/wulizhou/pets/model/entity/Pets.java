@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * @author D
+ *
  * @Create in 2019/5/5 15:39
  */
 @Data
@@ -45,7 +45,7 @@ public class Pets {
 	 * 市场价格
 	 */
 	@Column(name = "marketValue")
-	private Float marketValue;
+	private String marketValue;
 
 	/**
 	 * 寿命
@@ -116,12 +116,12 @@ public class Pets {
 	/**
 	 * 创建时间
 	 */
-	@Column(name = "created")
-	private Date created;
+	@Column(name = "createTime")
+	private Date createTime;
 
 	/**
 	 * 更新时间
 	 */
-	@Column(name = "updated")
-	private Date updated;
+	@Column(name = "updateTime")
+	private Date updateTime;
 }
