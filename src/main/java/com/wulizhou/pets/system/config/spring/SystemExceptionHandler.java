@@ -28,6 +28,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler(ApiException.class)
     public Result handleTokenAuthException(ApiException e) {
+        LOGGER.error("业务异常", e);
         return Result.fail(e.getResultCode());
     }
 
@@ -39,6 +40,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, MissingServletRequestParameterException.class})
     public Result handleMethodArgumentNotValidException(Exception e) {
+        LOGGER.error("参数检验失败", e);
         if (e instanceof MethodArgumentNotValidException) {
             // raw下验证未通过, @RequestBody时发生
             FieldError fieldError = ((MethodArgumentNotValidException) e).getBindingResult().getFieldError();
@@ -60,6 +62,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public Result handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        LOGGER.error("参数解析失败", e);
         return Result.fail(ResultCode.ERROR_400004);
     }
 
@@ -71,6 +74,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        LOGGER.error("不支持的请求方式", e);
         return Result.fail(ResultCode.ERROR_400005);
     }
 
@@ -82,6 +86,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Result handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
+        LOGGER.error("不支持的媒体类型", e);
         return Result.fail(ResultCode.ERROR_400006);
     }
 
@@ -93,6 +98,7 @@ public class SystemExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public Result handlerException( Exception e) {
+        LOGGER.error("未知异常", e);
         return Result.fail(ResultCode.ERROR);
     }
 

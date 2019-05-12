@@ -32,6 +32,11 @@ spring:
 logging:
   level:
     root: info
+    com:
+      wulizhou:
+        pets:
+          model:
+            mapper: debug
   file: ./pets.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
