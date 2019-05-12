@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author D
  * @Create in 2019/5/5 22:24
@@ -21,7 +23,7 @@ public class PetsController {
 
 	@GetMapping("/getIndexPage")
 	public Result getIndexPage() {
-		Pets pets = petsService.getPetsByLike();
+		List<Pets> pets = petsService.getPetsByLiked();
 		return Result.ok(pets);
 	}
 

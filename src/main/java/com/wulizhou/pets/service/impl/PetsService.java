@@ -7,6 +7,9 @@ import com.wulizhou.pets.system.common.BaseMapper;
 import com.wulizhou.pets.system.common.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
+
+import java.util.List;
 
 /**
  * @author D
@@ -28,7 +31,31 @@ public class PetsService extends BaseService<Pets> implements IPetsService {
 	 * @return
 	 */
 	@Override
-	public Pets getPetsByLike() {
-		return petsMapper.getPetsByLike();
+	public List<Pets> getPetsByLiked() {
+		Example example = new Example(Pets.class);
+		example.setOrderByClause("liked DESC");
+		return petsMapper.selectByExample(example);
+	}
+
+	/**
+	 * 通过收藏数排序
+	 * @return
+	 */
+	@Override
+	public List<Pets> getPetsByCollected() {
+		Example example = new Example(PetsService.class);
+		example.setOrderByClause("collected DESC");
+		return petsMapper.selectByExample(example);
+	}
+
+	/**
+	 * 通过点赞和收藏数排序
+	 * @return
+	 */
+	@Override
+	public List<Pets> getPetsByLikedAndCollected() {
+		Example example = new Example(PetsService.class);
+		example.setOrderByClause("liked DESC,collected DESC");
+		return petsMapper.selectByExample(example);
 	}
 }

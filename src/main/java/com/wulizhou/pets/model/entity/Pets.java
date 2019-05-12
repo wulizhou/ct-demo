@@ -38,8 +38,8 @@ public class Pets {
 	/**
 	 * 起源
 	 */
-	@Column(name = "original")
-	private String original;
+	@Column(name = "ancestralHome")
+	private String ancestralHome;
 
 	/**
 	 * 市场价格
@@ -70,12 +70,6 @@ public class Pets {
 	 */
 	@Column(name = "build")
 	private String build;
-
-	/**
-	 * 用途
-	 */
-	@Column(name = "use")
-	private String use;
 
 	/**
 	 * 图片
