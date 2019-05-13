@@ -1,10 +1,5 @@
 package com.wulizhou.pets;
 
-/**
- *
- * @Create in 2019/5/12 14:42
- */
-
 import net.sf.json.JSONObject;
 
 import java.io.*;
@@ -15,15 +10,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * @Create in 2019/5/13 22:00
+ */
+public class SMSUtil {
 
-public class JuheDemo {
 	public static final String DEF_CHATSET = "UTF-8";
 	public static final int DEF_CONN_TIMEOUT = 30000;
 	public static final int DEF_READ_TIMEOUT = 30000;
 	public static String userAgent =  "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.66 Safari/537.36";
 
 
-	public static String getVerifyCode(){
+	public static String getCode(){
 		String str="0123456789";
 		StringBuilder sb=new StringBuilder(4);
 		for(int i=0; i < 4 ; i++)
@@ -119,7 +117,7 @@ public class JuheDemo {
 	}
 
 	//将map型转为请求参数型
-	public static String urlencode(Map<String,String> data) {
+	public static String urlencode(Map<String,Object> data) {
 		StringBuilder sb = new StringBuilder();
 		for (Map.Entry i : data.entrySet()) {
 			try {
@@ -128,6 +126,7 @@ public class JuheDemo {
 				e.printStackTrace();
 			}
 		}
+		sb.replace(sb.length()-1,sb.length(),"");
 		return sb.toString();
 	}
 }

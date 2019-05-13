@@ -3,26 +3,32 @@ package com.wulizhou.pets.model.entity;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "user")
+@Table(name = "users")
 @Data
 @Accessors(chain = true)
 public class User {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
+    private Long userId;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "userName")
     private String userName;
 
+    @Column(name = "avatar")
     private String avatar;
 
+    @Column(name = "createTime")
     private Date createTime;
 
+    @Column(name = "updateTime")
     private Date updateTime;
 
 }
