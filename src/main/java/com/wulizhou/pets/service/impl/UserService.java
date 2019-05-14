@@ -102,7 +102,7 @@ public class UserService extends BaseService<User> implements IUserService {
         ResponseEntity<String> entity = restTemplate.getForEntity(URL + "?" + queryParam, String.class);//跨服务器访问
         JSONObject jsonObject = JSONObject.fromObject(entity.getBody());
         if (jsonObject.getInt("error_code")== 0) {
-            redisService.set(SMS_PREFIX + phone, verificationCode,30L);//90s 用户应该登录完成
+            redisService.set(SMS_PREFIX + phone, verificationCode,60L);//60s 用户应该登录完成
             return verificationCode;
         }
         return null;
