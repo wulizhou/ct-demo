@@ -15,7 +15,7 @@ public class Pets {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "petId")
-	private Long petId;
+	private Integer petId;
 
 	/**
 	 * 宠物类型

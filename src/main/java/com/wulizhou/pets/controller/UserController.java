@@ -1,11 +1,16 @@
 package com.wulizhou.pets.controller;
 
 
+import com.wulizhou.pets.service.facade.Constants;
 import com.wulizhou.pets.service.facade.IUserService;
 import com.wulizhou.pets.system.common.Result;
 import com.wulizhou.pets.system.common.ResultCode;
+import com.wulizhou.pets.system.utils.CookieUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 日志操作记录测试
@@ -36,9 +41,11 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    public Result login(@RequestParam("phone") String phone,@RequestParam("code") String code) {
+    public Result login(@RequestParam("phone") String phone, @RequestParam("code") String code,
+                        HttpServletRequest request, HttpServletResponse response) {
         //需要配合短信接口做
         String token = userService.login(phone,code);
+        CookieUtils.setCookie(request, response, Constants.COOKIE_NAME, token, Constants.TOKEN_COOKIE_MAX_AGE);
         return token != null ? Result.ok(token) : Result.fail(ResultCode.ERROR_400010);
     }
 
@@ -54,25 +61,30 @@ public class UserController {
     }*/
 
     /**
-     * 点赞
+     *
+     * @param petId
+     * @param operation like：点赞 ，unlike：取消点赞
      * @return
      */
     @PostMapping("/like")
-    public Result like(@RequestParam("petId") Integer petId,@RequestParam("operation") String operation) {
-//        userService.like(petId,operation);
-        return Result.ok();
+    public Result like(@RequestParam("petId") Integer petId,@RequestParam("operation") String operation,HttpServletRequest request) {
+        Integer result = userService.like(petId,operation,request);
+        return Result.ok(result > 0 ? "操作成功":"");
     }
 
     /**
      * 收藏 宠物或者宠物用品
      * 需要联合两个表查询两个表的数据
+     * @param id - 是petId或者petSupplyId
+     * @param operation l：点赞 ，u：取消点赞
+     * @param type 类型：判断是宠物还是用品 pet ,supplies
      * @return
      */
-    /*@PostMapping("/collect")
-    public Result collect(@RequestParam("petType") String petType,@RequestParam("operation") String operation) {
-        userService.collect();
+    @PostMapping("/collect")
+    public Result collect(@RequestParam("id") Integer id,@RequestParam("operation") String operation,@RequestParam("type") String type) {
+//        userService.collect();
         return Result.ok();
-    }*/
+    }
 
     /**
      * 获取点赞数据

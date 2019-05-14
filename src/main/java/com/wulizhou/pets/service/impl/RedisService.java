@@ -13,6 +13,17 @@ import java.util.concurrent.TimeUnit;
 public class RedisService {
 	@Autowired
 	private RedisTemplate redisTemplate;
+
+	/**
+	 * 查询key的生命周期
+	 *
+	 * @param key
+	 * @param timeUnit
+	 * @return
+	 */
+	public long getKeyExpire(String key, TimeUnit timeUnit) {
+		return redisTemplate.getExpire(key, timeUnit);
+	}
 	/**
 	 * 写入缓存
 	 * @param key

@@ -110,10 +110,10 @@ INSERT INTO `pets` VALUES ('25', '3', '金钱龟', 'Cuora trifasciata', '中国'
 INSERT INTO `pets` VALUES ('26', '3', '亚历山大鹦鹉', 'Alexandrine Parakeet', '东南亚', '800-1000元', '6-10年', null, '198-258g', null, 'http://img.boqiicdn.com/Data/BK/P/img24621408529108.jpg,http://img.boqiicdn.com/Data/BK/P/img67771408529282.jpg', '亚历山大鹦鹉体长58厘米，体重260克。这种鹦鹉鸟体为绿色，脸颊和颈部为灰蓝色，雄鸟颈部会长出一条灰蓝色的细窄条状羽毛，沿着蜡膜到眼睛有一条黑色羽毛，颈部有著一条很宽的黑色环状羽毛和一条很宽的粉红色环状羽毛；腹部黄绿色，外侧翅膀覆羽带有一块紫红色的羽毛；尾巴羽毛中间上方为绿底外加蓝绿色，尖端黄色；尾巴内侧黄色；鸟喙红色，尖端黄色；虹膜黄白色。雌鸟的颈部没有黑色的和粉红色的环状羽毛，鸟体色较为黯淡，中间尾羽平均长度较雄鸟短。幼鸟外型和雌鸟相当神似，外侧翅膀没有紫红色的羽毛，要到至少18个月大才会开始发展为成鸟的羽色，完全变成成鸟的羽色至少需要32到36个月。48个月性成熟。', '手养的亚历山大鹦鹉幼鸟可成为很不错的宠物，它们个性温和，体型大，手养鸟安静又聪明，爱与主人玩耍，说话能力在亚洲长尾鹦鹉算是较好的。', '如果主人长期不在家，或者在家也不跟鸟儿交流，那么它们很容易会出现啄羽的现象，情况严重时，它们身上的羽毛可能会被完全啄光。为了避免鸟儿啄羽，主人一定要常跟它们互动。其实跟鸟儿互动不仅可以避免啄羽症的出现，还能培养你跟鸟儿之间的感情。导致啄羽症的原因可不止“寂寞空虚冷”这一个，像寄生虫病、饲料有问题等都可能造成亚历山大鹦鹉啄羽。只要出现啄羽的现象，主人就要立即寻找出原因并及时解决，以免更严重的并且是你不想看到的情况出现。&人工饲养亚历山大鹦鹉时，主人首先需要给它们准备一个较大的笼子，因为亚历山大鹦鹉体型可不小；其次，亚历山大鹦鹉的啃咬力可能超乎你的想象，所以你不能将它们跟其他种鸟儿混养；第三，为鸟儿准备新鲜的树枝不仅可以让它们尽情地啃咬，还能给它们当做玩具使。', '亚历山大鹦鹉的主食应为五谷类等，而像瓜子等这样的食物可能是鸟儿喜爱吃的食物，但不应作为主食供给，不过你可以在训练的时候给它们吃一些。 除了主食外，一些水果和蔬菜也可以作为副食给亚历山大鹦鹉提供。不过有些鸟儿吃东西非常浪费，它们可能仅仅是咬几口就不会继续吃。对于亚历山大鹦鹉不再吃的食物，主人要及时清理掉。&在饲养的过程中，主人也可以观察一下亚历山大鹦鹉喜欢吃哪些食物，又不喜欢吃哪些食物。对于鸟儿喜欢吃的食物，主人可以适量供应，不过需要注意的是，有些鸟儿可能在一段时间内喜欢吃这种食物，但过了一段时间后又渐渐不再爱吃，主人可以根据实际情况进行饲喂的变动。', '1', '45', '2019-05-08 21:07:06', '2019-05-08 21:07:06');
 
 -- ----------------------------
--- Table structure for pets_users
+-- Table structure for users_pets
 -- ----------------------------
-DROP TABLE IF EXISTS `pets_users`;
-CREATE TABLE `pets_users` (
+DROP TABLE IF EXISTS `users_pets`;
+CREATE TABLE `users_pets` (
   `userId` int(11) DEFAULT NULL COMMENT '用户ID',
   `petId` int(11) DEFAULT NULL COMMENT '宠物ID',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
@@ -121,7 +121,7 @@ CREATE TABLE `pets_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of pets_users
+-- Records of users_pets
 -- ----------------------------
 
 -- ----------------------------
@@ -135,8 +135,6 @@ CREATE TABLE `pet_supplies` (
   `totalCount` int(10) unsigned DEFAULT '0' COMMENT '商品总量',
   `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
   `status` char(1) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
-  `liked` int(10) unsigned DEFAULT '0' COMMENT '点赞数',
-  `collected` int(10) unsigned DEFAULT '0' COMMENT '收藏数',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`petSupplyId`)

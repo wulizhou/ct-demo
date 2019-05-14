@@ -15,7 +15,7 @@ public class PetSupplies {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "petSupplyId")
-	private Long petSupplyId;
+	private Integer petSupplyId;
 
 	/**
 	 * 用品名
@@ -48,26 +48,14 @@ public class PetSupplies {
 	private Integer status;
 
 	/**
-	 * 点赞数
-	 */
-	@Column(name = "liked")
-	private Integer liked;
-
-	/**
-	 * 收藏数
-	 */
-	@Column(name = "collected")
-	private Integer collected;
-
-	/**
 	 * 创建时间
 	 */
-	@Column(name = "created")
-	private Date created;
+	@Column(name = "createTime")
+	private Date createTime;
 
 	/**
 	 * 更新时间
 	 */
-	@Column(name = "updated")
-	private Date updated;
+	@Column(name = "updateTime")
+	private Date updateTime;
 }

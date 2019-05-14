@@ -17,7 +17,7 @@ public class Article {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "articleId")
-	private Long articleId;
+	private Integer articleId;
 
 	/**
 	 * 宠物类型

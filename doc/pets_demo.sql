@@ -30,8 +30,6 @@ price FLOAT DEFAULT 0 COMMENT '价格',
 totalCount INT unsigned DEFAULT 0 COMMENT '商品总量',
 image varchar(500) DEFAULT NULL COMMENT '商品图片',
 status CHAR(1) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
-liked INT unsigned DEFAULT 0 COMMENT '点赞数',
-collected INT unsigned DEFAULT 0 COMMENT '收藏数',
 createTime datetime DEFAULT NULL COMMENT '创建时间',
 updateTime datetime DEFAULT NULL COMMENT '更新时间'
 );
@@ -48,7 +46,7 @@ createTime datetime DEFAULT NULL COMMENT '创建时间',
 updateTime datetime DEFAULT NULL COMMENT '更新时间'
 );
 --用户与宠物中间表
-create table pets_users(
+create table users_pets(
 userId INT COMMENT '用户ID',
 petId INT COMMENT '宠物ID',
 createTime datetime DEFAULT NULL COMMENT '创建时间',
