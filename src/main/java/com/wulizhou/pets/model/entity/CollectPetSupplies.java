@@ -10,10 +10,10 @@ import java.util.Date;
 /**
  * @Create in 2019/5/15 0:16
  */
-@Table(name = "users_pets")
+@Table(name = "collect_pet_supplies")
 @Data
 @Accessors(chain = true)
-public class UsersPetSupplies {
+public class CollectPetSupplies {
 
 	@Column(name = "userId")
 	private Integer userId;

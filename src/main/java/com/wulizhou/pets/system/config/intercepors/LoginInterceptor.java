@@ -1,10 +1,6 @@
 package com.wulizhou.pets.system.config.intercepors;
 
-import com.wulizhou.pets.model.entity.User;
-import com.wulizhou.pets.service.facade.Constants;
 import com.wulizhou.pets.service.impl.UserService;
-import com.wulizhou.pets.system.utils.CookieUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -26,9 +22,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	//这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//		String token = Constants.REDIS_TOKEN_PREFIX + request.getParameter("token");
-
-		String token = CookieUtils.getCookieValue(request, Constants.COOKIE_NAME);
+		return true;
+		/*String token = CookieUtils.getCookieValue(request, Constants.COOKIE_NAME);
 		if(StringUtils.isNotBlank(token)){
 			User user = userService.queryUserByToken(token);
 			if(user != null){
@@ -38,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			}
 		}
 		response.sendRedirect("/login");//TODO 需要返回到首页
-		return false;
+		return false;*/
 	}
 
 	@Override

@@ -26,6 +26,18 @@ public class Article {
 	private String petType;
 
 	/**
+	 * 图片地址
+	 */
+	@Column(name = "imgUrl")
+	private String imgUrl;
+
+	/**
+	 * 标题
+	 */
+	@Column(name = "title")
+	private String title;
+
+	/**
 	 * 文章内容
 	 */
 	@Column(name = "content")

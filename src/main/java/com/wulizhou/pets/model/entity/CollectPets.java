@@ -6,10 +6,10 @@ import lombok.experimental.Accessors;
 import javax.persistence.*;
 import java.util.Date;
 
-@Table(name = "users_pets")
+@Table(name = "collect_pets")
 @Data
 @Accessors(chain = true)
-public class UsersPets {
+public class CollectPets {
 
     @Column(name = "userId")
     private Integer userId;
