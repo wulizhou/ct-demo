@@ -1,5 +1,6 @@
 package com.wulizhou.pets.system.config.spring;
 
+import com.wulizhou.pets.system.config.intercepors.LoginInterceptor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -25,13 +26,20 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 	public void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
 		registry.addInterceptor(requestTimeInteceptor());
+		registry.addInterceptor(loginInterceptor());
 	}
+
 	/**
 	 * requestTimeInteceptor
 	 */
-	public HandlerInterceptor requestTimeInteceptor(){
+	public HandlerInterceptor requestTimeInteceptor() {
 		String[] includePatterns = { "/**" };
 		return new MappedInterceptor(includePatterns, new RequestTimeInteceptor());
+	}
+
+	public HandlerInterceptor loginInterceptor() {
+		String[] includePatterns = { "/**" };
+		return new MappedInterceptor(includePatterns, new LoginInterceptor());
 	}
 	
 }

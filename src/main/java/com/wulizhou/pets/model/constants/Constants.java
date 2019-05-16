@@ -1,4 +1,4 @@
-package com.wulizhou.pets.service.facade;
+package com.wulizhou.pets.model.constants;
 
 /**
  * @Create in 2019/5/14 22:34
@@ -11,4 +11,6 @@ public interface Constants {
 	int TOKEN_COOKIE_MAX_AGE = 2592000;
 	String PET = "pet";
 	String SUPPLIES = "supplies";
+	String TOKEN = "token";
+	String USER = "user";
 }

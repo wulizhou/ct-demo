@@ -1,16 +1,17 @@
 package com.wulizhou.pets.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wulizhou.pets.model.entity.*;
 import com.wulizhou.pets.model.mapper.*;
-import com.wulizhou.pets.service.facade.Constants;
+import com.wulizhou.pets.model.constants.Constants;
+import com.wulizhou.pets.session.LoginUserInfo;
+import com.wulizhou.pets.session.LoginUserManager;
+import com.wulizhou.pets.service.RedisService;
 import com.wulizhou.pets.service.facade.IUserService;
 import com.wulizhou.pets.system.common.BaseMapper;
 import com.wulizhou.pets.system.common.BaseService;
 import com.wulizhou.pets.system.utils.SMSUtil;
 import net.sf.json.JSONObject;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,9 @@ public class UserService extends BaseService<User> implements IUserService {
 
     @Autowired
     private RedisService redisService;
+
+    @Autowired
+    private LoginUserManager manager;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -86,15 +90,14 @@ public class UserService extends BaseService<User> implements IUserService {
     private String getToken(List<User> list, HttpServletRequest request) {
         User userFromDB = list.get(0);
         request.setAttribute("user",userFromDB);
-        //登录标识符
-        String token = DigestUtils.md5Hex(userFromDB.getUserId() + "" + System.currentTimeMillis());
-        String key = Constants.REDIS_TOKEN_PREFIX + token;
-        //2、将用户信息设置到redis（设置1个月的生存时间）
-        try {
-            redisService.set(key, MAPPER.writeValueAsString(userFromDB),2592000L);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        // 登录标识符
+        String token = UUID.randomUUID().toString();
+        // 删除旧的登录信息，生成新的登录信息（设置1个月的生存时间）
+        LoginUserInfo loginUserInfo = new LoginUserInfo();
+        loginUserInfo.setToken(token);
+        loginUserInfo.setUser(userFromDB);
+        manager.deleteByUserId(userFromDB.getUserId());
+        manager.put(token, loginUserInfo);
         return token;
     }
 

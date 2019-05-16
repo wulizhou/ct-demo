@@ -3,6 +3,7 @@ package com.wulizhou.pets.system.config.spring;
 import com.wulizhou.pets.system.common.Result;
 import com.wulizhou.pets.system.common.ResultCode;
 import com.wulizhou.pets.system.exception.ApiException;
+import com.wulizhou.pets.system.exception.TokenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -30,6 +31,17 @@ public class SystemExceptionHandler {
     public Result handleTokenAuthException(ApiException e) {
         LOGGER.error("业务异常", e);
         return Result.fail(e.getResultCode());
+    }
+
+    /**
+     * 无效的token
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(TokenException.class)
+    public Result handleTokenException(TokenException e) {
+        LOGGER.error("无效的token");
+        return Result.fail(ResultCode.TOKEN_ERROR);
     }
 
     /**

@@ -3,13 +3,12 @@ package com.wulizhou.pets.controller;
 
 import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.service.facade.IUserService;
+import com.wulizhou.pets.session.LoginUserManager;
+import com.wulizhou.pets.session.SessionUtil;
 import com.wulizhou.pets.system.common.Result;
 import com.wulizhou.pets.system.common.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +25,9 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private LoginUserManager manager;
 
     /**
      * 发送验证码
@@ -48,6 +50,13 @@ public class UserController {
         String token = userService.login(phone,code,request);
 //        CookieUtils.setCookie(request, response, Constants.COOKIE_NAME, token, Constants.TOKEN_COOKIE_MAX_AGE);
         return token != null ? Result.ok(token) : Result.fail(ResultCode.ERROR_400010);
+    }
+
+    @PutMapping("/logout")
+    public Result logout() {
+        // 清除登录信息
+        manager.deleteByUserId(SessionUtil.getCurrentUserId());
+        return Result.ok();
     }
 
     /**
