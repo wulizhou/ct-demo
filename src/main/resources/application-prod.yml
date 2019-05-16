@@ -1,0 +1,20 @@
+# 项目端口
+server:
+  port: 8080
+
+spring:
+  datasource:
+    name:
+    url: jdbc:mysql://localhost:3306/pets?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+  redis:
+    password: ${REDIS_PASSWORD}
+logging:
+  level:
+    root: warn
+    com:
+      wulizhou:
+        pets:
+          model:
+            mapper: warn
