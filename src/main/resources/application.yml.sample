@@ -43,7 +43,7 @@ logging:
 http:
   maxTotal: 300
   defaultMaxPerRoute: 50
-  connectTimeout: 1000
-  connectionRequestTimeout: 60000
-  socketTimeout: 60000
+  connectTimeout: 10000
+  connectionRequestTimeout: 10000
+  socketTimeout: 10000
   staleConnectionCheckEnabled: true
