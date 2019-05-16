@@ -28,12 +28,12 @@ public class LoginUserManager {
 	 * 存放登录数据
 	 * 
 	 * @param token
-	 * @param user
+	 * @param loginUser
 	 */
-	public void put(String token, LoginUserInfo user) {
+	public void put(String token, LoginUserInfo loginUser) {
 		if (StringUtils.isNotBlank(token)) {
-			redisService.set(Constants.REDIS_TOKEN_PREFIX + token, user, LOGIN_EXPIRE);
-			redisService.set(Constants.REDIS_TOKEN_PREFIX + user.getUser().getUserId(), user, LOGIN_EXPIRE);
+			redisService.set(Constants.REDIS_TOKEN_PREFIX + token, loginUser, LOGIN_EXPIRE);
+			redisService.set(Constants.REDIS_TOKEN_PREFIX + loginUser.getUser().getUserId(), loginUser, LOGIN_EXPIRE);
 		}
 	}
 

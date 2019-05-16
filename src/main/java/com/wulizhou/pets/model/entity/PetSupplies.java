@@ -18,28 +18,77 @@ public class PetSupplies {
 	private Integer petSupplyId;
 
 	/**
+	 * 是否被收藏过 0为否，1为有
+	 */
+	@Column(name = "is_collected")
+	private Integer isCollected;
+
+	/**
+	 * 是否被点赞过
+	 */
+	@Column(name = "is_lied")
+	private Integer isLied;
+
+	/**
+	 * 用品名
+	 */
+	@Column(name = "imgUrl")
+	private String imgUrl;
+
+	/**
 	 * 用品名
 	 */
 	@Column(name = "title")
 	private String title;
 
 	/**
-	 * 价格
+	 * 单价
 	 */
-	@Column(name = "price")
-	private Float price;
+	@Column(name = "unitPrice")
+	private String unitPrice;
 
 	/**
-	 * 商品总量
+	 * 现价
 	 */
-	@Column(name = "totalCount")
-	private Integer totalCount;
+	@Column(name = "newCast")
+	private String newCast;
+
+	/**
+	 * 原价
+	 */
+	@Column(name = "oriPrice")
+	private Float oriPrice;
+
+	/**
+	 * 存货
+	 */
+	@Column(name = "stock")
+	private Integer stock;
+
+	/**
+	 * 已售
+	 */
+	@Column(name = "sale")
+	private Integer sale;
+
+
+	/**
+	 * 商品参数
+	 */
+	@Column(name = "params")
+	private String params;
 
 	/**
 	 * 商品图片
 	 */
-	@Column(name = "image")
-	private String image;
+	@Column(name = "imgNewList")
+	private String imgNewList;
+
+	/**
+	 * 内容
+	 */
+	@Column(name = "detailContent")
+	private String detailContent;
 
 	/**
 	 * 商品状态，1-正常，2-下架，3-删除

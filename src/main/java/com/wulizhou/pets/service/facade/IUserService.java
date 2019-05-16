@@ -25,17 +25,17 @@ public interface IUserService extends IBaseService<User> {
 	 */
 	String login(String phone, String code, HttpServletRequest request);
 
-	int like(Integer petId, Integer operation, HttpServletRequest request);
+	int like(Integer petId, Integer operation);
 
 	User queryUserByToken(String token);
 
-	Integer collect(Integer id, Integer operation, String type, HttpServletRequest request);
+	Integer collect(Integer id, Integer operation, String type);
 
 	Integer getLikeCount(HttpServletRequest request);
 
 	Integer getCollectCount(HttpServletRequest request);
 
-	List<Pets> getLike(HttpServletRequest request);
+	List<Pets> getLike();
 
-	List<Object> getCollect(HttpServletRequest request);
+	List<Object> getCollect();
 }

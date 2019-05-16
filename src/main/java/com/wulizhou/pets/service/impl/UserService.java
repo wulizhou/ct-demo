@@ -8,6 +8,7 @@ import com.wulizhou.pets.session.LoginUserInfo;
 import com.wulizhou.pets.session.LoginUserManager;
 import com.wulizhou.pets.service.RedisService;
 import com.wulizhou.pets.service.facade.IUserService;
+import com.wulizhou.pets.session.SessionUtil;
 import com.wulizhou.pets.system.common.BaseMapper;
 import com.wulizhou.pets.system.common.BaseService;
 import com.wulizhou.pets.system.utils.SMSUtil;
@@ -142,27 +143,46 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public int like(Integer id, Integer operation, HttpServletRequest request) {
+    public int like(Integer id, Integer operation) {
         int result = 0;
-//        User user = (User)request.getAttribute("user");
-        User user = null;
-        System.out.println("从session中获取的用户：" + user);
         //点赞
         if (operation == 1) {
             LikePets likePets = new LikePets();
-            likePets.setUserId(1);//TODO
+            likePets.setUserId(SessionUtil.getCurrentUserId());//TODO
             likePets.setPetId(id);
             likePets.setCreateTime(new Date());
             likePets.setUpdateTime(new Date());
             result = likePetsMapper.insert(likePets);
-            //取消点赞
+            //同时更新宠物表的点赞数
+            updatePetsLikedOrCollected(id,1,Constants.LIKE);
+        //取消点赞
         }else if (operation == 0){
             Example example = new Example(LikePets.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("userId",1).andEqualTo("petId",id);//TODO
+            criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);//TODO
             result = likePetsMapper.deleteByExample(example);
+            updatePetsLikedOrCollected(id,-1,Constants.LIKE);
         }
         return result;
+    }
+
+    /**
+     * 更新宠物表的点赞数或收藏数
+     * @param id
+     * @param operation 是点赞还是取消点赞 -- 点赞+1 ，取消点赞-1
+     * @param likedOrCollected 判断点赞还是收藏
+     */
+    private void updatePetsLikedOrCollected(Integer id, int operation,String likedOrCollected) {
+        Pets pet = new Pets();
+        pet.setPetId(id);
+        Pets selectOne = petsMapper.selectOne(pet);
+        if (likedOrCollected.equals(Constants.LIKE)) {
+            selectOne.setLiked(pet.getLiked() + operation);
+        }else if (likedOrCollected.equals(Constants.COLLECT)) {
+            selectOne.setCollected(pet.getCollected() + operation);
+        }
+        selectOne.setLiked(pet.getLiked() + operation);
+        petsMapper.updateByPrimaryKeySelective(selectOne);
     }
 
     /**
@@ -171,38 +191,36 @@ public class UserService extends BaseService<User> implements IUserService {
      * @param id - 是petId或者petSupplyId
      * @param operation l：收藏 ，u：取消收藏
      * @param type 类型：判断是宠物还是用品 pet ,supplies
-     * @param request
      * @return
      */
     @Override
-    public Integer collect(Integer id, Integer operation, String type, HttpServletRequest request) {
+    public Integer collect(Integer id, Integer operation, String type) {
         int result = 0;
-//        User user = (User)request.getAttribute("user");
-        User user = null;
-        System.out.println("从session中获取的用户：" + user);
         //收藏宠物
         if (type.equals(Constants.PET)) {
             //点赞
             if (operation == 1) {
                 CollectPets collectPets = new CollectPets();
-                collectPets.setUserId(1);//TODO
+                collectPets.setUserId(SessionUtil.getCurrentUserId());//TODO
                 collectPets.setPetId(id);
                 collectPets.setCreateTime(new Date());
                 collectPets.setUpdateTime(new Date());
                 result = collectPetsMapper.insert(collectPets);
-                //取消点赞
+                updatePetsLikedOrCollected(id,1,Constants.COLLECT);
+            //取消点赞
             }else if (operation == 0){
                 Example example = new Example(CollectPets.class);
                 Example.Criteria criteria = example.createCriteria();
-                criteria.andEqualTo("userId",1).andEqualTo("petId",id);//TODO
+                criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);//TODO
                 result = collectPetsMapper.deleteByExample(example);
+                updatePetsLikedOrCollected(id,-1,Constants.COLLECT);
             }
             //收藏用品
         }else if (type.equals(Constants.SUPPLIES)) {
             //收藏
             if (operation == 1) {
                 CollectPetSupplies collectPetSupplies = new CollectPetSupplies();
-                collectPetSupplies.setUserId(1);//TODO
+                collectPetSupplies.setUserId(SessionUtil.getCurrentUserId());//TODO
                 collectPetSupplies.setPetSupplyId(id);
                 collectPetSupplies.setCreateTime(new Date());
                 collectPetSupplies.setUpdateTime(new Date());
@@ -211,7 +229,7 @@ public class UserService extends BaseService<User> implements IUserService {
             }else if (operation == 0){
                 Example example = new Example(CollectPetSupplies.class);
                 Example.Criteria criteria = example.createCriteria();
-                criteria.andEqualTo("userId",1).andEqualTo("petSupplyId",id);//TODO
+                criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petSupplyId",id);//TODO
                 result = collectPetSuppliesMapper.deleteByExample(example);
             }
         }
@@ -224,24 +242,19 @@ public class UserService extends BaseService<User> implements IUserService {
 //        Example example = new Example(CollectPetSupplies.class);
 //        Example.Criteria criteria = example.createCriteria();
 //        criteria.andEqualTo("userId",user.getUserId());
-        return likePetsMapper.selectCount(new LikePets().setUserId(1));//TODO
+        return likePetsMapper.selectCount(new LikePets().setUserId(SessionUtil.getCurrentUserId()));//TODO
     }
 
     @Override
     public Integer getCollectCount(HttpServletRequest request) {
-//        User user = (User)request.getAttribute("user");
-//      Example example = new Example(CollectPetSupplies.class);
-//      Example.Criteria criteria = example.createCriteria();
-//      criteria.andEqualTo("userId",user.getUserId());
-        return collectPetSuppliesMapper.selectCount(new CollectPetSupplies().setUserId(1)) +//TODO
-                collectPetsMapper.selectCount(new CollectPets().setUserId(1));
+        return collectPetSuppliesMapper.selectCount(new CollectPetSupplies().setUserId(SessionUtil.getCurrentUserId())) +//TODO
+                collectPetsMapper.selectCount(new CollectPets().setUserId(SessionUtil.getCurrentUserId()));
     }
 
     @Override
-    public List<Pets> getLike(HttpServletRequest request) {
-//        User user = (User)request.getAttribute("user");
+    public List<Pets> getLike() {
         //先查询中间表获取petId
-        List<LikePets> collectPets = likePetsMapper.select(new LikePets().setUserId(1));//TODO
+        List<LikePets> collectPets = likePetsMapper.select(new LikePets().setUserId(SessionUtil.getCurrentUserId()));//TODO
         List<Integer> petIds = new ArrayList<>();
         Iterator<LikePets> iterator = collectPets.iterator();
         while (iterator.hasNext()){
@@ -256,9 +269,8 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public List<Object> getCollect(HttpServletRequest request) {
+    public List<Object> getCollect() {
         List<Object> result = new ArrayList<>();
-        //User user = (User)request.getAttribute("user");
         //1.先查询宠物的
         List<CollectPets> collectPets = collectPetsMapper.select(new CollectPets().setUserId(1));
         List<Integer> petIds = new ArrayList<>();

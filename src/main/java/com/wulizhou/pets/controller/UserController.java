@@ -77,8 +77,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/like")
-    public Result like(@RequestParam("petId") Integer petId,@RequestParam("operation") Integer operation,HttpServletRequest request) {
-        Integer result = userService.like(petId,operation,request);
+    public Result like(@RequestParam("petId") Integer petId,@RequestParam("operation") Integer operation) {
+        Integer result = userService.like(petId,operation);
         return Result.ok(result > 0 ? "操作成功":"");
     }
 
@@ -91,8 +91,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/collect")
-    public Result collect(@RequestParam("id") Integer id,@RequestParam("operation") Integer operation,@RequestParam("type") String type,HttpServletRequest request) {
-        Integer result = userService.collect(id,operation,type,request);
+    public Result collect(@RequestParam("id") Integer id,@RequestParam("operation") Integer operation,@RequestParam("type") String type) {
+        Integer result = userService.collect(id,operation,type);
         return Result.ok(result > 0 ? "操作成功":"");
     }
 
@@ -101,8 +101,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/getLike")
-    public Result getLike(HttpServletRequest request) {
-        List<Pets> pets = userService.getLike(request);
+    public Result getLike() {
+        List<Pets> pets = userService.getLike();
         return Result.ok(pets);
     }
 
@@ -111,8 +111,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/getCollect")
-    public Result getCollect(HttpServletRequest request) {
-        List<Object> list = userService.getCollect(request);
+    public Result getCollect() {
+        List<Object> list = userService.getCollect();
         return Result.ok(list);
     }
 
