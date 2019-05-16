@@ -1,6 +1,7 @@
 package com.wulizhou.pets.service.facade;
 
 import com.wulizhou.pets.model.entity.Article;
+import com.wulizhou.pets.model.entity.PetSupplies;
 import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.system.common.IBaseService;
 
@@ -33,4 +34,8 @@ public interface IPetsService extends IBaseService<Pets> {
 	List<Pets> getPetsByPetType(String petType, Integer order);
 
 	List<Article> getArtical(String petType);
+
+	Pets getPetsByPetId(Integer petId);
+
+	PetSupplies getPetSuppliesByPetSupplyId(Integer petSupplyId);
 }

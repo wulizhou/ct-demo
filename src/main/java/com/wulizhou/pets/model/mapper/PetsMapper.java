@@ -9,5 +9,4 @@ import com.wulizhou.pets.system.common.BaseMapper;
  */
 public interface PetsMapper extends BaseMapper<Pets> {
 
-	Pets getPetsByLike();
 }

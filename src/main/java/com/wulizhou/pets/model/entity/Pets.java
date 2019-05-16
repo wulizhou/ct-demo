@@ -18,7 +18,7 @@ public class Pets {
 	private Integer petId;
 
 	/**
-	 * 是否被收藏过 0为否，1为有
+	 * 是否被收藏过 0为否，大于1为有
 	 */
 	@Column(name = "is_collected")
 	private Integer isCollected;
@@ -26,7 +26,7 @@ public class Pets {
 	/**
 	 * 是否被点赞过
 	 */
-	@Column(name = "is_lied")
+	@Column(name = "is_liked")
 	private Integer isLied;
 
 	/**
