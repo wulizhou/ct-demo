@@ -38,12 +38,12 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
-#The config for HttpClient
 
+# The config for HttpClient
 http:
   maxTotal: 300
   defaultMaxPerRoute: 50
   connectTimeout: 1000
-  connectionRequestTimeout: 500
-  socketTimeout: 5000
+  connectionRequestTimeout: 60000
+  socketTimeout: 60000
   staleConnectionCheckEnabled: true
