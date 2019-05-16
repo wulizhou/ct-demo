@@ -103,18 +103,20 @@ public class UserService extends BaseService<User> implements IUserService {
 
     @Override
     public String getVerificationCode(String phone) {
+        // 短信有效期
+        int smsExpireMinute = 30;
         String verificationCode = SMSUtil.getCode();
         Map<String,Object> data = new HashMap<>();
         data.put("mobile",phone);
         data.put("tpl_id",139779);
-        data.put("tpl_value","#code#=" + verificationCode + "&#m#=1");
+        data.put("tpl_value","#code#=" + verificationCode + "&#m#=" + smsExpireMinute);
         data.put("dtype","");
         data.put("key","4c7218d28c0ec13c087db316d6df23eb");
         String queryParam = SMSUtil.urlencode(data);
         ResponseEntity<String> entity = restTemplate.getForEntity(Constants.URL + "?" + queryParam, String.class);//跨服务器访问
         JSONObject jsonObject = JSONObject.fromObject(entity.getBody());
         if (jsonObject.getInt("error_code")== 0) {
-            redisService.set(Constants.SMS_PREFIX + phone, verificationCode,60L);//60s 用户应该登录完成
+            redisService.set(Constants.SMS_PREFIX + phone, verificationCode,smsExpireMinute * 60L);//60s 用户应该登录完成
             return verificationCode;
         }
         return null;

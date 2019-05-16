@@ -39,7 +39,11 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 
 	public HandlerInterceptor loginInterceptor() {
 		String[] includePatterns = { "/**" };
-		return new MappedInterceptor(includePatterns, new LoginInterceptor());
+		String[] excludePatterns = {
+				"/user/getVerificationCode",
+				"/user/login"
+		};
+		return new MappedInterceptor(includePatterns, excludePatterns, new LoginInterceptor());
 	}
 	
 }
