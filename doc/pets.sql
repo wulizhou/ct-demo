@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-05-16 02:04:57
+Date: 2019-05-16 23:36:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -170,10 +170,16 @@ INSERT INTO `pets` VALUES ('26', '3', '亚历山大鹦鹉', 'Alexandrine Parakee
 DROP TABLE IF EXISTS `pet_supplies`;
 CREATE TABLE `pet_supplies` (
   `petSupplyId` int(11) NOT NULL,
+  `imgUrl` varchar(50) DEFAULT NULL,
   `title` varchar(100) NOT NULL COMMENT '用品名',
-  `price` float DEFAULT '0' COMMENT '价格',
-  `totalCount` int(10) unsigned DEFAULT '0' COMMENT '商品总量',
-  `image` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `unitPrice` varchar(20) DEFAULT NULL,
+  `newCast` float(11,0) DEFAULT NULL,
+  `oriPrice` float(11,0) DEFAULT '0' COMMENT '价格',
+  `stock` int(10) unsigned DEFAULT '0' COMMENT '商品总量',
+  `sale` int(10) unsigned DEFAULT '0' COMMENT '商品总量',
+  `params` varchar(500) DEFAULT NULL,
+  `imgNewList` varchar(500) DEFAULT NULL COMMENT '商品图片',
+  `detailContent` varchar(500) DEFAULT NULL,
   `status` char(1) NOT NULL DEFAULT '1' COMMENT '商品状态，1-正常，2-下架，3-删除',
   `createTime` datetime DEFAULT NULL COMMENT '创建时间',
   `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
@@ -183,8 +189,8 @@ CREATE TABLE `pet_supplies` (
 -- ----------------------------
 -- Records of pet_supplies
 -- ----------------------------
-INSERT INTO `pet_supplies` VALUES ('1', '加拿大纽顿nutram 无谷系列去骨鳟鱼三文鱼全期犬粮6kg T28原装进口粮', null, '0', null, '1', '2019-05-08 21:07:06', '2019-05-08 21:07:06');
-INSERT INTO `pet_supplies` VALUES ('2', '加拿大纽顿nutram 低敏系列成犬粮去骨鸡肉糙米狗粮6kg S7原装进口粮', null, '0', null, '1', '2019-05-08 21:07:06', '2019-05-08 21:07:06');
+INSERT INTO `pet_supplies` VALUES ('1', 'src/assets/pet/shop/nutram/0.jpg', '加拿大纽顿nutram 无谷系列去骨鳟鱼三文鱼全期犬粮6kg T28原装进口粮', '42.5元/斤', '510', '561', '0', '0', '[{ Key: \"商品编号\", Value: \"1080410\" },{ Key: \"商品规格\", Value: \"6kg\" },{ Key: \"主要原料\", Value: \"去骨鲜鳟鱼肉、脱水三文鱼粉、去骨鲜三文鱼肉、脱水鲱鱼粉、三文鱼油\" },{ Key: \"营养成分\", Value: \"粗蛋白≥36%、粗脂肪≥17%、OMEGA3≥1%、OMEGA6\" },{ Key: \"适用对象\", Value: \"全龄犬\" },{ Key: \"颗粒大小\", Value: \"标准颗粒\" },{ Key: \"口味配方\", Value: \"去骨鳟鱼&三文鱼\" },{ Key: \"出厂保质期\", Value: \"18个月\" },{ Key: \"产地\", Value: \"加拿大\" },{ Key: \"重量\", Value: \"6.26KG\" }]', 'src/assets/pet/shop/nutram/0.jpg,src/assets/pet/shop/nutram/1.jpg,src/assets/pet/shop/nutram/2.jpg,src/assets/pet/shop/nutram/3.jpg', 'src/assets/pet/shop/nutram/01.jpg,src/assets/pet/shop/nutram/02.jpg,src/assets/pet/shop/nutram/03.jpg,src/assets/pet/shop/nutram/04.jpg,src/assets/pet/shop/nutram/05.jpg,src/assets/pet/shop/nutram/06.jpg,src/assets/pet/shop/nutram/07.jpg', '1', '2019-05-08 21:07:06', '2019-05-08 21:07:06');
+INSERT INTO `pet_supplies` VALUES ('2', 'src/assets/pet/shop/nutram/4.jpg', '加拿大纽顿nutram 低敏系列成犬粮去骨鸡肉糙米狗粮6kg S7原装进口粮', '38.33元/斤', '460', '506', '0', '0', '[{ Key: \"商品编号\", Value: \"1080404\" },\r\n{ Key: \"商品规格\", Value: \"6kg\" },\r\n{ Key: \"主要原料\", Value: \"脱水鸡肉粉、 去骨鲜鸡肉、 燕麦\" },\r\n{ Key: \"营养成分\", Value: \"粗蛋白≥26%，粗脂肪≥15%，钙≥1%，水份≤10%\" },\r\n{ Key: \"适用对象\", Value: \"成犬\" },\r\n{ Key: \"颗粒大小\", Value: \"适中\" },\r\n{ Key: \"口味配方\", Value: \"鸡肉\" },\r\n{ Key: \"产地\", Value: \"加拿大\" },\r\n{ Key: \"重量\", Value: \"6.00KG\" }]', 'src/assets/pet/shop/nutram/4.jpg,src/assets/pet/shop/nutram/5.jpg,src/assets/pet/shop/nutram/6.jpg,src/assets/pet/shop/nutram/7.jpg', 'src/assets/pet/shop/nutram/08.jpg,src/assets/pet/shop/nutram/09.jpg,src/assets/pet/shop/nutram/10.jpg,src/assets/pet/shop/nutram/11.jpg,src/assets/pet/shop/nutram/12.jpg', '1', '2019-05-08 21:07:06', '2019-05-08 21:07:06');
 
 -- ----------------------------
 -- Table structure for users

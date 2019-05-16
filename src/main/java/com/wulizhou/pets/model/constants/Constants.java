@@ -13,4 +13,6 @@ public interface Constants {
 	String SUPPLIES = "supplies";
 	String TOKEN = "token";
 	String USER = "user";
+	String LIKE = "like";
+	String COLLECT = "collect";
 }

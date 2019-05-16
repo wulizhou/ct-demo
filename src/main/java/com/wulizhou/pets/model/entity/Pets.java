@@ -18,6 +18,18 @@ public class Pets {
 	private Integer petId;
 
 	/**
+	 * 是否被收藏过 0为否，1为有
+	 */
+	@Column(name = "is_collected")
+	private Integer isCollected;
+
+	/**
+	 * 是否被点赞过
+	 */
+	@Column(name = "is_lied")
+	private Integer isLied;
+
+	/**
 	 * 宠物类型
 	 */
 	@Column(name = "petType")
