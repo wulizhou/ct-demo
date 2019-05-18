@@ -31,9 +31,9 @@ public interface IUserService extends IBaseService<User> {
 
 	Integer collect(Integer id, Integer operation, String type);
 
-	Integer getLikeCount(HttpServletRequest request);
+	Integer getLikeCount();
 
-	Integer getCollectCount(HttpServletRequest request);
+	Integer getCollectCount();
 
 	List<Pets> getLike();
 

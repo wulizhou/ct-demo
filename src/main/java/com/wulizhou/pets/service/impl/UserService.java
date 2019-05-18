@@ -177,11 +177,10 @@ public class UserService extends BaseService<User> implements IUserService {
         pet.setPetId(id);
         Pets selectOne = petsMapper.selectOne(pet);
         if (likedOrCollected.equals(Constants.LIKE)) {
-            selectOne.setLiked(pet.getLiked() + operation);
+            selectOne.setLiked(selectOne.getLiked() + operation);
         }else if (likedOrCollected.equals(Constants.COLLECT)) {
-            selectOne.setCollected(pet.getCollected() + operation);
+            selectOne.setCollected(selectOne.getCollected() + operation);
         }
-        selectOne.setLiked(pet.getLiked() + operation);
         petsMapper.updateByPrimaryKeySelective(selectOne);
     }
 
@@ -237,7 +236,7 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public Integer getLikeCount(HttpServletRequest request) {
+    public Integer getLikeCount() {
 //        User user = (User)request.getAttribute("user");
 //        Example example = new Example(CollectPetSupplies.class);
 //        Example.Criteria criteria = example.createCriteria();
@@ -246,7 +245,7 @@ public class UserService extends BaseService<User> implements IUserService {
     }
 
     @Override
-    public Integer getCollectCount(HttpServletRequest request) {
+    public Integer getCollectCount() {
         return collectPetSuppliesMapper.selectCount(new CollectPetSupplies().setUserId(SessionUtil.getCurrentUserId())) +//TODO
                 collectPetsMapper.selectCount(new CollectPets().setUserId(SessionUtil.getCurrentUserId()));
     }

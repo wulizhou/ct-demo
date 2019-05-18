@@ -7,6 +7,7 @@ import com.wulizhou.pets.model.mapper.ArticleMapper;
 import com.wulizhou.pets.model.mapper.PetSuppliesMapper;
 import com.wulizhou.pets.model.mapper.PetsMapper;
 import com.wulizhou.pets.service.facade.IPetsService;
+import com.wulizhou.pets.session.SessionUtil;
 import com.wulizhou.pets.system.common.BaseMapper;
 import com.wulizhou.pets.system.common.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,15 +95,11 @@ public class PetsService extends BaseService<Pets> implements IPetsService {
 
 	@Override
 	public Pets getPetsByPetId(Integer petId) {
-		Pets pets = new Pets();
-		pets.setPetId(petId);
-		return petsMapper.selectOne(pets);
+		return petsMapper.selectByPetId(petId, SessionUtil.getCurrentUserId());
 	}
 
 	@Override
 	public PetSupplies getPetSuppliesByPetSupplyId(Integer petSupplyId) {
-		PetSupplies petSupplies = new PetSupplies();
-		petSupplies.setPetSupplyId(petSupplyId);
-		return petSuppliesMapper.selectOne(petSupplies);
+		return petSuppliesMapper.selectByPetSupplyId(petSupplyId,SessionUtil.getCurrentUserId());
 	}
 }
