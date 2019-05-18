@@ -7,21 +7,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Result {
+public class Result<T> {
 
     private Integer code;
     private String message;
-    private Object data;
+    private T data;
 
-    public static Result ok(){
+    public static <T> Result<T> ok(){
         return new Result(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
     }
 
-    public static Result ok(Object data){
+    public static <T> Result<T> ok(T data){
         return new Result(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
     }
 
-    public static Result fail(ResultCode code, Object... messages){
+    public static <T> Result<T> fail(ResultCode code, Object... messages){
         return new Result(code.getCode(), messages == null || messages.length == 0 ? code.getMessage() : String.format(code.getMessage(), messages), null);
     }
 

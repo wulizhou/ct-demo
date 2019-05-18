@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.handler.MappedInterceptor;
 
@@ -19,7 +20,16 @@ import org.springframework.web.servlet.handler.MappedInterceptor;
 @Configuration
 @ComponentScan(includeFilters={@Filter(classes=RestController.class)})
 public class SpringMVCConfig extends WebMvcConfigurationSupport {
-	
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// swagger
+		registry.addResourceHandler("swagger-ui.html")
+				.addResourceLocations("classpath:/META-INF/resources/");
+		registry.addResourceHandler("/webjars/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/");
+	}
+
 	/**
 	 * Spring inteceptor 
 	 */
@@ -27,7 +37,16 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 	public void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
 		registry.addInterceptor(requestTimeInteceptor()).addPathPatterns("/**");
-		registry.addInterceptor(loginInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/getVerificationCode", "/user/login");
+		registry.addInterceptor(loginInterceptor()).addPathPatterns("/**")
+				.excludePathPatterns(
+						"/user/getVerificationCode",
+						"/user/login",
+						"/webjars/**",
+						"/resources/**",
+						"/swagger-ui.html",
+						"/swagger-resources/**",
+						"/v2/api-docs"
+				);
 	}
 
 	/**
