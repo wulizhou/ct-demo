@@ -17,4 +17,3 @@ logging:
         pets:
           model:
             mapper: warn
-  file: /app/pets.log
