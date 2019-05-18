@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Create in 2019/5/14 21:39
  */
-@Component
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired

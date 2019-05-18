@@ -52,7 +52,7 @@ public class UserController {
         return token != null ? Result.ok(token) : Result.fail(ResultCode.ERROR_400010);
     }
 
-    @PutMapping("/logout")
+    @PostMapping("/logout")
     public Result logout() {
         // 清除登录信息
         manager.deleteByUserId(SessionUtil.getCurrentUserId());

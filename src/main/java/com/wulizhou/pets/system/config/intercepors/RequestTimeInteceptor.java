@@ -1,4 +1,4 @@
-package com.wulizhou.pets.system.config.spring;
+package com.wulizhou.pets.system.config.intercepors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

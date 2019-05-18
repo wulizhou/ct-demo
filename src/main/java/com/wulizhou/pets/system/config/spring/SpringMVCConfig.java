@@ -1,6 +1,8 @@
 package com.wulizhou.pets.system.config.spring;
 
 import com.wulizhou.pets.system.config.intercepors.LoginInterceptor;
+import com.wulizhou.pets.system.config.intercepors.RequestTimeInteceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.MappedInterceptor;
 
 /**
@@ -25,25 +26,21 @@ public class SpringMVCConfig extends WebMvcConfigurationSupport {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		super.addInterceptors(registry);
-		registry.addInterceptor(requestTimeInteceptor());
-		registry.addInterceptor(loginInterceptor());
+		registry.addInterceptor(requestTimeInteceptor()).addPathPatterns("/**");
+		registry.addInterceptor(loginInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/getVerificationCode", "/user/login");
 	}
 
 	/**
 	 * requestTimeInteceptor
 	 */
+	@Bean
 	public HandlerInterceptor requestTimeInteceptor() {
-		String[] includePatterns = { "/**" };
-		return new MappedInterceptor(includePatterns, new RequestTimeInteceptor());
+		return new RequestTimeInteceptor();
 	}
 
+	@Bean
 	public HandlerInterceptor loginInterceptor() {
-		String[] includePatterns = { "/**" };
-		String[] excludePatterns = {
-				"/user/getVerificationCode",
-				"/user/login"
-		};
-		return new MappedInterceptor(includePatterns, excludePatterns, new LoginInterceptor());
+		return new LoginInterceptor();
 	}
-	
+
 }

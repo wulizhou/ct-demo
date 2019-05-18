@@ -63,8 +63,8 @@ public class UserService extends BaseService<User> implements IUserService {
 
     @Override
     public String login(String phone, String code, HttpServletRequest request) {
-        String genCode = (String) redisService.get(Constants.SMS_PREFIX + phone);
-        if (genCode.equals(code)) {
+        String genCode = redisService.get(Constants.SMS_PREFIX + phone);
+        if (code.equals(genCode)) {
             Example example = new Example(User.class);
             Example.Criteria criteria = example.createCriteria();
             criteria.andEqualTo("phone",phone);
