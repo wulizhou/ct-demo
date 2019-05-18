@@ -1,0 +1,44 @@
+# 项目端口
+server:
+  port: 8081
+
+spring:
+  datasource:
+    name:
+    url: jdbc:mysql://localhost:3306/yourdatabasename?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: yourmysqlusername
+    password: yourmysqlpassword
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    database: 1
+    host: localhost
+    password: yourredispassword
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 100
+        min-idle: 0
+        max-active: 8
+        max-wait: -1
+
+logging:
+  level:
+    root: info
+    com:
+      wulizhou:
+        pets:
+          model:
+            mapper: debug
+  file: ./pets.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p{%F.%L}-%m%n"
+
+http:
+  maxTotal: 300
+  defaultMaxPerRoute: 50
+  connectTimeout: 10000
+  connectionRequestTimeout: 10000
+  socketTimeout: 10000
+  staleConnectionCheckEnabled: true
