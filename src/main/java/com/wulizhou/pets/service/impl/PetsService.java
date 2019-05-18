@@ -1,8 +1,10 @@
 package com.wulizhou.pets.service.impl;
 
 import com.wulizhou.pets.model.entity.Article;
+import com.wulizhou.pets.model.entity.PetSupplies;
 import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.model.mapper.ArticleMapper;
+import com.wulizhou.pets.model.mapper.PetSuppliesMapper;
 import com.wulizhou.pets.model.mapper.PetsMapper;
 import com.wulizhou.pets.service.facade.IPetsService;
 import com.wulizhou.pets.system.common.BaseMapper;
@@ -22,6 +24,9 @@ public class PetsService extends BaseService<Pets> implements IPetsService {
 
 	@Autowired
 	private PetsMapper petsMapper;
+
+	@Autowired
+	private PetSuppliesMapper petSuppliesMapper;
 
 	@Autowired
 	private ArticleMapper articleMapper;
@@ -85,5 +90,19 @@ public class PetsService extends BaseService<Pets> implements IPetsService {
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("petType",petType);
 		return articleMapper.selectByExample(example);
+	}
+
+	@Override
+	public Pets getPetsByPetId(Integer petId) {
+		Pets pets = new Pets();
+		pets.setPetId(petId);
+		return petsMapper.selectOne(pets);
+	}
+
+	@Override
+	public PetSupplies getPetSuppliesByPetSupplyId(Integer petSupplyId) {
+		PetSupplies petSupplies = new PetSupplies();
+		petSupplies.setPetSupplyId(petSupplyId);
+		return petSuppliesMapper.selectOne(petSupplies);
 	}
 }

@@ -1,11 +1,15 @@
 package com.wulizhou.pets.controller;
 
 import com.wulizhou.pets.model.entity.Article;
+import com.wulizhou.pets.model.entity.PetSupplies;
 import com.wulizhou.pets.model.entity.Pets;
 import com.wulizhou.pets.service.facade.IPetsService;
 import com.wulizhou.pets.system.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -38,6 +42,26 @@ public class PetsController {
 	public Result getPetsByPetType(@RequestParam("petType") String petType,@RequestParam("order") Integer order ) {
 		List<Pets> pets = petsService.getPetsByPetType(petType,order);
 		return Result.ok(pets);
+	}
+
+	/**
+	 * 宠物详情
+	 * @return
+	 */
+	@PostMapping("/getPetsByPetId")
+	public Result getPetsByPetId(@RequestParam("petId") Integer petId) {
+		Pets pets = petsService.getPetsByPetId(petId);
+		return Result.ok(pets);
+	}
+
+	/**
+	 * 宠物详情
+	 * @return
+	 */
+	@PostMapping("/getPetSuppliesByPetSupplyId")
+	public Result getPetSuppliesByPetSupplyId(@RequestParam("petSupplyId") Integer petSupplyId) {
+		PetSupplies petSupplies = petsService.getPetSuppliesByPetSupplyId(petSupplyId);
+		return Result.ok(petSupplies);
 	}
 
 	/**

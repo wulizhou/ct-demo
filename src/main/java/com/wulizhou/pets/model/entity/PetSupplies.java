@@ -18,7 +18,7 @@ public class PetSupplies {
 	private Integer petSupplyId;
 
 	/**
-	 * 是否被收藏过 0为否，1为有
+	 * 是否被收藏过 0为否，大于1为有
 	 */
 	@Column(name = "is_collected")
 	private Integer isCollected;

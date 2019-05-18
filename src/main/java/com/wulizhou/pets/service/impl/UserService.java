@@ -253,7 +253,7 @@ public class UserService extends BaseService<User> implements IUserService {
 
     @Override
     public List<Pets> getLike() {
-        //先查询中间表获取petId
+        /*//先查询中间表获取petId
         List<LikePets> collectPets = likePetsMapper.select(new LikePets().setUserId(SessionUtil.getCurrentUserId()));//TODO
         List<Integer> petIds = new ArrayList<>();
         Iterator<LikePets> iterator = collectPets.iterator();
@@ -265,14 +265,15 @@ public class UserService extends BaseService<User> implements IUserService {
         Example example = new Example(LikePets.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andIn("petId",petIds);
-        return petsMapper.selectByExample(example);
+        return petsMapper.selectByExample(example);*/
+        return userMapper.getLike(SessionUtil.getCurrentUserId());
     }
 
     @Override
     public List<Object> getCollect() {
         List<Object> result = new ArrayList<>();
-        //1.先查询宠物的
-        List<CollectPets> collectPets = collectPetsMapper.select(new CollectPets().setUserId(1));
+        /*//1.先查询宠物的
+        List<CollectPets> collectPets = collectPetsMapper.select(new CollectPets().setUserId(SessionUtil.getCurrentUserId()));
         List<Integer> petIds = new ArrayList<>();
         Iterator<CollectPets> iterator = collectPets.iterator();
         while (iterator.hasNext()){
@@ -286,7 +287,7 @@ public class UserService extends BaseService<User> implements IUserService {
         List<Pets> pets = petsMapper.selectByExample(petExample);
 
         //2.查询用品的
-        List<CollectPetSupplies> collectPetSupplies = collectPetSuppliesMapper.select(new CollectPetSupplies().setUserId(1));
+        List<CollectPetSupplies> collectPetSupplies = collectPetSuppliesMapper.select(new CollectPetSupplies().setUserId(SessionUtil.getCurrentUserId()));
         List<Integer> petSupplyIds = new ArrayList<>();
         Iterator<CollectPetSupplies> iterator1 = collectPetSupplies.iterator();
         while (iterator1.hasNext()){
@@ -297,10 +298,12 @@ public class UserService extends BaseService<User> implements IUserService {
         Example petSuppliesExample = new Example(CollectPetSupplies.class);
         Example.Criteria petSuppliesCriteria = petSuppliesExample.createCriteria();
         petSuppliesCriteria.andIn("petSupplyId",petSupplyIds);
-        List<PetSupplies> petSupplies = petSuppliesMapper.selectByExample(petSuppliesExample);
+        List<PetSupplies> petSupplies = petSuppliesMapper.selectByExample(petSuppliesExample);*/
         //3.合并两个
-        result.addAll(pets);
-        result.addAll(petSupplies);
+        List<Pets> collectPets = userMapper.getCollectPets(SessionUtil.getCurrentUserId());
+        List<PetSupplies> collectPetSupplies = userMapper.getCollectPetSupplies(SessionUtil.getCurrentUserId());
+        result.addAll(collectPets);
+        result.addAll(collectPetSupplies);
         return result;
     }
 
