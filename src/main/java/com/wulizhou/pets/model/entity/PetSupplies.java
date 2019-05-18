@@ -21,7 +21,7 @@ public class PetSupplies {
 	 * 是否被收藏过 0为否，大于1为有
 	 */
 	@Transient
-	private Integer is_collected;
+	private Integer isCollected;
 
 	/**
 	 * 用品名

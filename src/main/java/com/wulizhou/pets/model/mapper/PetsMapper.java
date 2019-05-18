@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface PetsMapper extends BaseMapper<Pets> {
 
-	@Select("select a.*,IFNULL(b.petId,0)as is_liked,IFNULL(c.petId,0)as is_collected from pets a LEFT JOIN like_pets b on a.petId = b.petId  " +
-			"LEFT JOIN collect_pets c on a.petId = c.petId where b.userId = #{userId} and a.petId = #{petId}")
+	@Select("select a.*,IFNULL(b.petId,0)as is_liked,IFNULL(c.petId,0)as is_collected from pets a LEFT JOIN like_pets b on (a.petId = b.petId and b.userId = #{userId}) " +
+			"LEFT JOIN collect_pets c on (a.petId = c.petId and c.userId = #{userId}) where a.petId = #{petId}")
 	Pets selectByPetId(@Param("petId")Integer petId, @Param("userId")Integer userId);
 }

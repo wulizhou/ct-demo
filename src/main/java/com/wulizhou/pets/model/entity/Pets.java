@@ -21,13 +21,13 @@ public class Pets {
 	 * 是否被收藏过 0为否，大于1为有
 	 */
 	@Transient
-	private Integer is_collected;
+	private Integer isCollected;
 
 	/**
 	 * 是否被点赞过
 	 */
 	@Transient
-	private Integer is_liked;
+	private Integer isLiked;
 
 	/**
 	 * 宠物类型
