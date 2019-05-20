@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @Create in 2019/5/5 22:24
  */
-@Api(value="宠物controller")
+@Api(tags = "宠物controller")
 @RequestMapping("/pets")
 @RestController
 public class PetsController {

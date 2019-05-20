@@ -7,5 +7,4 @@
 /.idea/
 /pets.log
 /pets.log.*
-/src/main/resources/application.yml
 *.iml

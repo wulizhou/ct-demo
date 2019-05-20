@@ -1,11 +1,10 @@
 # 项目端口
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
-    name:
-    url: jdbc:mysql://localhost:3306/pets?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/${DATABASE_NAME}?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: ${DATABASE_USER}
     password: ${DATABASE_PASSWORD}
   redis:

@@ -24,7 +24,7 @@ import java.util.List;
  * @author Administrator
  *
  */
-@Api(value="用户controller")
+@Api(tags = "用户controller")
 @RequestMapping("/user")
 @RestController
 public class UserController {
