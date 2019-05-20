@@ -90,7 +90,7 @@ public class UserController {
     public Result like(@ApiParam(name="petId",value="宠物ID",required=true)@RequestParam("petId") Integer petId,
                        @ApiParam(name="operation",value="操作：1-点赞 ，0-取消点赞",required=true)@RequestParam("operation") Integer operation) {
         Integer result = userService.like(petId,operation);
-        return Result.ok(result > 0 ? "操作成功":"");
+        return Result.ok(result > 0 ? "操作成功":"数据已存在，请勿重复发送");
     }
 
     /**
@@ -107,7 +107,7 @@ public class UserController {
                           @ApiParam(name="operation",value="操作：l-收藏 ，0-取消收藏",required=true)@RequestParam("operation") Integer operation,
                           @ApiParam(name="type",value="类型：宠物-pet ,宠物用品-supplies",required=true)@RequestParam("type") String type) {
         Integer result = userService.collect(id,operation,type);
-        return Result.ok(result > 0 ? "操作成功":"");
+        return Result.ok(result > 0 ? "操作成功":"数据已存在，请勿重复发送");
     }
 
     /**

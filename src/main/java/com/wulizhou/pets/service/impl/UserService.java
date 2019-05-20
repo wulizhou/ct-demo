@@ -147,8 +147,16 @@ public class UserService extends BaseService<User> implements IUserService {
         int result = 0;
         //点赞
         if (operation == 1) {
+            Example example = new Example(LikePets.class);
+            Example.Criteria criteria = example.createCriteria();
+            criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);
+            List<LikePets> list = likePetsMapper.selectByExample(example);
+            //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
+            if (list.get(0) != null) {
+                return -1;
+            }
             LikePets likePets = new LikePets();
-            likePets.setUserId(SessionUtil.getCurrentUserId());//TODO
+            likePets.setUserId(SessionUtil.getCurrentUserId());
             likePets.setPetId(id);
             likePets.setCreateTime(new Date());
             likePets.setUpdateTime(new Date());
@@ -159,7 +167,7 @@ public class UserService extends BaseService<User> implements IUserService {
         }else if (operation == 0){
             Example example = new Example(LikePets.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);//TODO
+            criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);
             result = likePetsMapper.deleteByExample(example);
             updatePetsLikedOrCollected(id,-1,Constants.LIKE);
         }
@@ -199,6 +207,14 @@ public class UserService extends BaseService<User> implements IUserService {
         if (type.equals(Constants.PET)) {
             //点赞
             if (operation == 1) {
+                Example example = new Example(CollectPets.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);
+                List<CollectPets> list = collectPetsMapper.selectByExample(example);
+                //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
+                if (list.get(0) != null) {
+                    return -1;
+                }
                 CollectPets collectPets = new CollectPets();
                 collectPets.setUserId(SessionUtil.getCurrentUserId());//TODO
                 collectPets.setPetId(id);
@@ -218,8 +234,16 @@ public class UserService extends BaseService<User> implements IUserService {
         }else if (type.equals(Constants.SUPPLIES)) {
             //收藏
             if (operation == 1) {
+                Example example = new Example(CollectPetSupplies.class);
+                Example.Criteria criteria = example.createCriteria();
+                criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petSupplyId",id);
+                List<CollectPetSupplies> list = collectPetSuppliesMapper.selectByExample(example);
+                //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
+                if (list.get(0) != null) {
+                    return -1;
+                }
                 CollectPetSupplies collectPetSupplies = new CollectPetSupplies();
-                collectPetSupplies.setUserId(SessionUtil.getCurrentUserId());//TODO
+                collectPetSupplies.setUserId(SessionUtil.getCurrentUserId());
                 collectPetSupplies.setPetSupplyId(id);
                 collectPetSupplies.setCreateTime(new Date());
                 collectPetSupplies.setUpdateTime(new Date());
