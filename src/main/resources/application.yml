@@ -13,7 +13,7 @@ spring:
   redis:
     database: 1
     host: localhost
-    password: ${REDIS_PASSWORD}
+    password: ${REDIS_PASSWORD:}
     port: 6379
     jedis:
       pool:
@@ -42,3 +42,7 @@ http:
   connectionRequestTimeout: 10000
   socketTimeout: 10000
   staleConnectionCheckEnabled: true
+
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
