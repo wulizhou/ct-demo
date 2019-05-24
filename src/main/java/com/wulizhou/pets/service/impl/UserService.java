@@ -240,7 +240,7 @@ public class UserService extends BaseService<User> implements IUserService {
                 criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petSupplyId",id);
                 List<CollectPetSupplies> list = collectPetSuppliesMapper.selectByExample(example);
                 //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
-                if (list.get(0) != null) {
+                if (CollectionUtils.isNotEmpty(list)) {
                     return -1;
                 }
                 CollectPetSupplies collectPetSupplies = new CollectPetSupplies();
