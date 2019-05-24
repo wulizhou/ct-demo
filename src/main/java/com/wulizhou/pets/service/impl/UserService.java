@@ -13,6 +13,7 @@ import com.wulizhou.pets.system.common.BaseMapper;
 import com.wulizhou.pets.system.common.BaseService;
 import com.wulizhou.pets.system.utils.SMSUtil;
 import net.sf.json.JSONObject;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -69,7 +70,7 @@ public class UserService extends BaseService<User> implements IUserService {
             Example.Criteria criteria = example.createCriteria();
             criteria.andEqualTo("phone",phone);
             List<User> list = userMapper.selectByExample(example);
-            if(list != null && list.size() > 0) {
+            if(CollectionUtils.isNotEmpty(list)) {
                 return getToken(list,request);
             }else {
                 User user = new User();
@@ -152,7 +153,7 @@ public class UserService extends BaseService<User> implements IUserService {
             criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);
             List<LikePets> list = likePetsMapper.selectByExample(example);
             //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
-            if (list.get(0) != null) {
+            if (CollectionUtils.isNotEmpty(list)) {
                 return -1;
             }
             LikePets likePets = new LikePets();
@@ -212,7 +213,7 @@ public class UserService extends BaseService<User> implements IUserService {
                 criteria.andEqualTo("userId",SessionUtil.getCurrentUserId()).andEqualTo("petId",id);
                 List<CollectPets> list = collectPetsMapper.selectByExample(example);
                 //如果已经存在就返回错误， -1为数据已存在，请勿重复发送数据
-                if (list.get(0) != null) {
+                if (CollectionUtils.isNotEmpty(list)) {
                     return -1;
                 }
                 CollectPets collectPets = new CollectPets();
