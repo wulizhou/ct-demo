@@ -16,4 +16,4 @@ logging:
       wulizhou:
         pets:
           model:
-            mapper: warn
+            mapper: debug
